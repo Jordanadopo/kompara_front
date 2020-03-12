@@ -1,0 +1,635 @@
+<style>
+    :host {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 14px;
+      color: #333;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  
+    h1,
+    h2,
+    h3,
+    h4,
+    h5{
+      margin: 8px 0;
+    }
+    h6{
+      margin: 4px 0;
+    }
+  
+    p {
+      margin: 0;
+    }
+  
+    .spacer {
+      flex: 1;
+    }
+  
+    .toolbar {
+      height: 60px;
+      margin: -8px;
+      display: flex;
+      align-items: center;
+      background-color: #b1221d;
+      color: white;
+      font-weight: 600;
+    }
+  
+    .toolbar img {
+      margin: 0 16px;
+    }
+  
+    .toolbar #twitter-logo {
+      height: 40px;
+      margin: 0 16px;
+    }
+  
+    .toolbar #twitter-logo:hover {
+      opacity: 0.8;
+    }
+  
+    .content {
+      display: flex;
+      margin: 10px auto;
+      padding: 0 16px;
+      max-width: 100vw;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    svg.material-icons {
+      height: 24px;
+      width: auto;
+    }
+  
+    svg.material-icons:not(:last-child) {
+      margin-right: 8px;
+    }
+  
+  
+    svg#rocket {
+      width: 80px;
+      position: absolute;
+      left: -10px;
+      top: -24px;
+    }
+  
+    svg#rocket-smoke {
+      height: 100vh;
+      position: absolute;
+      top: 10px;
+      right: 180px;
+      z-index: -10;
+    }
+  
+    a,
+    a:visited,
+    a:hover {
+      color: #1976d2;
+      text-decoration: none;
+    }
+  
+    a:hover {
+      color: #125699;
+    }
+  
+    .terminal {
+      position: relative;
+      width: 80%;
+      max-width: 600px;
+      border-radius: 6px;
+      padding-top: 45px;
+      margin-top: 8px;
+      overflow: hidden;
+      background-color: rgb(15, 15, 16);
+    }
+  
+    .terminal::before {
+      content: "\2022 \2022 \2022";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: rgb(58, 58, 58);
+      color: #c2c3c4;
+      width: 100%;
+      font-size: 2rem;
+      line-height: 0;
+      padding: 14px 0;
+      text-indent: 4px;
+    }
+  
+    .terminal pre {
+      font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+      color: white;
+      padding: 0 1rem 1rem;
+      margin: 0;
+    }
+  
+    .circle-link {
+      height: 40px;
+      width: 40px;
+      border-radius: 40px;
+      margin: 8px;
+      background-color: white;
+      border: 1px solid #eeeeee;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+      transition: 1s ease-out;
+    }
+  
+    .circle-link:hover {
+      transform: translateY(-0.25rem);
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    }
+  
+    footer {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      line-height: 20px;
+    }
+  
+    footer a {
+      display: flex;
+      align-items: center;
+    }
+  
+    .github-star-badge {
+      color: #24292e;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      padding: 3px 10px;
+      border: 1px solid rgba(27, 31, 35, .2);
+      border-radius: 3px;
+      background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
+      margin-left: 4px;
+      font-weight: 600;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    }
+  
+    .github-star-badge:hover {
+      background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+      border-color: rgba(27, 31, 35, .35);
+      background-position: -.5em;
+    }
+  
+    .github-star-badge .material-icons {
+      height: 16px;
+      width: 16px;
+      margin-right: 4px;
+    }
+  
+    svg#clouds {
+      position: fixed;
+      bottom: -160px;
+      left: -230px;
+      z-index: -10;
+      width: 1920px;
+    }
+  
+  
+    /* Responsive Styles */
+    @media screen and (max-width: 767px) {
+  
+  
+  
+      svg#rocket-smoke {
+        right: 120px;
+        transform: rotate(-5deg);
+      }
+    }
+  
+    @media screen and (max-width: 575px) {
+      svg#rocket-smoke {
+        display: none;
+        visibility: hidden;
+      }
+    }
+</style>
+<!-- Toolbar -->
+<!--<div class="toolbar" style="background-color: white; color: #333;" role="banner">
+    <span style="margin-left: 5px;">Blog</span>
+   <div class="spacer"></div>
+</div><br/>-->
+<div class="toolbar" style="background-color: white; color: green;" role="banner">
+     <img height="40" alt="kompara Logo"
+      src="../../assets/icons/logo_kompara.png" />
+    <div class="spacer"></div>
+</div>
+<br/>
+<div class="row" style="text-align: center;" *ngIf="isLoading">
+  <div class="spinner-grow text-muted"></div>
+  <div class="spinner-grow text-primary"></div>
+  <div class="spinner-grow text-success"></div>
+  <div class="spinner-grow text-info"></div>
+  <div class="spinner-grow text-warning"></div>
+  <div class="spinner-grow text-danger"></div>
+  <div class="spinner-grow text-secondary"></div>
+  <div class="spinner-grow text-dark"></div>
+  <div class="spinner-grow text-light"></div>
+</div>
+<div *ngIf="!result" class="content" role="main">
+  <alert></alert>
+  
+    <div class="container-fluid" style="padding-top: 1%;">
+      <div class="row">
+        <div class="col-lg-7 col-md-12 py-2" style="">
+          <div class="row py-2">
+            <div class="col-lg-6 col-sm-6 py-2">  
+                <div  class="card card-req card-transfert" >
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                        <div class="col-md-12"><h4 class="text-white " style="margin-top:42px" >Transfert d'argent</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 py-2">  
+                <div  class="card card-req card-devise">
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                        <div class="col-md-12 "><h4 class="text-white " style="margin-top:42px">Devises</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 py-2">  
+                <div  class="card card-req card-paiement-mobile">
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                        <div class="col-md-12"><h4 class="text-white " style="margin-top:42px">Paiement mobile</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 py-2">  
+                <div  class="card card-req card-paiement-facture">
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                        <div class="col-md-12"><h4 class="text-white " style="margin-top:42px">Paiement de factures</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 py-2">  
+                <div  class="card card-req card-banque-digitale">
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                        <div class="col-md-12"><h4 class="text-white " style="margin-top:42px">Banques digitales</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 py-2">  
+                <div  class="card card-req card-banque-traditionnelle">
+                    <div class="card-body">
+                        <div class="row" style="text-align: center;">
+                        <div class="col-md-12"><h4 class="text-white " style="margin-top:42px">Banques traditionnelles</h4></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+                    
+        </div>
+        <div class="col-lg-5 col-md-12 py-2 card"
+          >
+          <h4 class="text-primary" style="text-align: center;">Transfert d'argent</h4>
+          <form class="row" style="">
+            <div class="form-group col-md-7">
+                <label for="OriginePaysSelect">Origine</label>
+                <select class="form-control" #t id="OriginePaysSelect" [(ngModel)]="fromDevise" name="origine" (change)="callFromDevise($event.target.value)">
+                  <option *ngFor="let element of allPays" [value]="element.devise" name="devOr">{{element.pays}}</option>
+                </select>
+              </div>
+            <div class="form-group col-md-5">
+                <label for="OrigineDeviseInput">Devise</label>
+                <input type="text" class="form-control" id="OrigineDeviseInput" placeholder="devise" [value]="fromDevise" disabled>
+            </div>
+            <br/>
+          <br/>
+            <div class="form-group col-md-7">
+                <label for="DestinationPaysSelect">Destination</label>
+                <select class="form-control" #d id="DestinationPaysSelect"  [(ngModel)]="toDevise" name="destination" (change)="callToDevise($event.target.value)">
+                  <option *ngFor="let element of allPays2" [value]="element.devise" name="devDest">{{element.pays}}</option>
+                </select>
+              </div>
+            <div class="form-group col-md-5">
+                <label for="DestinationDeviseInput">Devise</label>
+                <input type="text" class="form-control" id="DestinationDeviseInput" placeholder="devise" [value]="toDevise" disabled>
+            </div>
+            <br/>
+          <br/>
+            <div class="form-group col-md-6">
+                <label for="amount">Montant</label>
+                <input type="number" step="0.01" #box (keyup)="getMontant(box.value)" [(ngModel)]="montant" class="form-control" id="amount" placeholder="{{montant}}">
+              </div>
+            <div class="form-group col-md-6">
+                <label for="EmetteurSelect">Emetteur</label>
+                <select class="form-control" id="EmetteurSelect" [(ngModel)]="emetteur"  name="emetteur" (change)="getEmetteur($event.target.value)">
+                  <option [value]="Entreprise">Entreprise</option>
+                  <option [value]="Particulier">Particulier</option>
+                </select>
+            </div>
+            <br/>
+          <br/>
+           <br/>
+           <!--<div class="form-check col-md-12" style="text-align: center;">
+            <input type="checkbox" class="form-check-input" id="agree" (change)="checkCheckBoxvalue($event)">
+            <label class="form-check-label" for="agree">J'accepte les <u>conditions d'utilisation</u></label>
+          </div> -->
+          <br/>
+          <br/>
+          <div class="form-group col-md-12" style="text-align: center;">
+            <input type="button" (click)="doQuery()" class="btn btn-success" id="send" style="border-radius: 25px;" value="COMPARER">
+          </div> 
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid" *ngIf="result">
+    <div class="row">
+        <div class="col-md-12">
+            <button style="float: right;" class="btn btn-danger" (click)="backToRequest()"><i class="fa fa-close"></i></button>
+        </div>
+    </div>
+    
+
+<div class="content" role="main">
+
+  <div class="container-fluid" style="padding-top: 1%;">
+    <form class="containe-fluid" style="">
+
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <h5 style="margin-top: 20px; margin-bottom: 20px; text-align: center;">Meilleurs solutions de transferts d'argent depuis {{paysOr}} vers {{paysDest}}</h5>
+        </div>
+          <div class="col-md-4 col-sm-11 col-xs-12">
+              <div class="row">
+                  <div class="col-md-5 col-sm-5 col-xs-5 ">
+                      <div class="form-group">
+                          <label for="OriginePaysSelect">Origine</label>
+                          <select class="form-control" #d1 id="OriginePaysSelect"  [(ngModel)]="fromDevise" name="origine" (change)="callFromDevise($event.target.value)">
+                            <option *ngFor="let element of allPays" [value]="element.devise" name="devOr">{{element.pays}}</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="col-md-2 col-sm-2 col-xs-2">
+                    <label for="amount" class="text-white">echange</label>
+                    <button class="btn btn-default btn-sm" >
+                        <i class="fa fa-exchange-alt"></i>
+                    </button>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5">
+                  <div class="form-group">
+                      <label for="DestinationPaysSelect">Destination</label>
+                      <select class="form-control" #d id="DestinationPaysSelect"  [(ngModel)]="toDevise" name="destination" (change)="callToDevise($event.target.value)">
+                        <option *ngFor="let element of allPays2" [value]="element.devise" name="devDest">{{element.pays}}</option>
+                      </select>                      </div>
+              </div>
+                  
+              </div>
+          </div>
+          <div class="col-md-1 col-sm-1 ">
+              
+          </div>
+
+          
+          <div class="col-md-3 col-sm-11 col-xs-12">
+              <div class="row">
+                <div class="col-md-6  col-sm-6 col-xs-6 ">
+                  <div class="form-group">
+                      <label for="amount">Montant</label>
+                      <input type="number" step="0.01" #box (keyup)="getMontant(box.value)" [(ngModel)]="montant" class="form-control" id="amount" value="{{montant}}">
+                    </div>
+              </div>
+                <div class="col-md-3  col-sm-3 col-xs-3 ">
+                  <div class="form-group">
+                      <label for="OrigineDeviseInput">Devise de l'origine</label>
+                      <input type="text" style="font-size: small;" class="form-control" id="OrigineDeviseInput" placeholder="devise" value="{{fromDevise}}" disabled>
+                  </div>
+              </div>
+                  <div class="col-md-3  col-sm-3 col-xs-3 ">
+                      <div class="form-group">
+                          <label for="DestinatioDeviseInput">Et de destination</label>
+                          <input type="text" style="font-size: small;" class="form-control" id="DestinatioDeviseInput" placeholder="devise" value="{{toDevise}}" disabled>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-1 col-sm-1 ">
+              
+          </div>
+          <div class="col-md-3 col-sm-12 col-xs-12">
+            <label for="EmetteurSelect">Emetteur</label>
+            <select class="form-control" id="EmetteurSelect" [(ngModel)]="emetteur"  name="emetteur" (change)="getEmetteur($event.target.value)">
+              <option [value]="Entreprise">Entreprise</option>
+              <option [value]="Particulier">Particulier</option>
+            </select>
+        </div>
+
+      </div>
+
+      <div class="row">
+          <!--<div class="col-md-5  col-sm-12 col-xs-12 ">
+              <div class="form-group">
+                  <label for="amount">Montant</label>
+                  <input type="number" step="0.01" #box (keyup)="getMontant(box.value)" [(ngModel)]="montant" class="form-control" id="amount" value="{{montant}}">
+                </div>
+          </div>
+
+          
+          <div class="col-md-offset-1 col-md-6 col-xs-12">
+              <label for="EmetteurSelect">Emetteur</label>
+              <select class="form-control" id="EmetteurSelect" [(ngModel)]="emetteur"  name="emetteur" (change)="getEmetteur($event.target.value)">
+                  <option [value]="Entreprise">Entreprise</option>
+                  <option [value]="Particulier">Particulier</option>
+                </select>
+          </div>-->
+          <br/>
+          <br/>
+          <div class="form-group col-md-12 col-xs-12" style="text-align: center;">
+            <input type="button" (click)="makeComparison()" class="btn btn-success" id="send" style="border-radius: 25px;" value="COMPARER">
+          </div> 
+      </div>
+    </form>
+      <div class="row" style="margin-top: 5%;">
+          <div class="col-md-9 col-sm-12 col-xs-12">
+              <span class="h5" style="margin-top: 20px;">Économisez jusqu’à 85 % sur cette transaction avec les fournisseurs suivants :</span>
+          </div>
+
+          <div class="col-md-3 col-sm-5 col-xs-12 col-md-offset-0 col-sm-offset-7">
+              <div class="form-group form-group-sm row">
+                  <label class="control-label col-md-3 form-control bg-dark text-white" style="border-top-right-radius: 0; border-bottom-right-radius: 0;" for="sort">Trier:</label> 
+                  <select id="sort" name="sort" class="form-control col-md-9" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                      <option label="Recommandé" value="1" selected="selected">Recommandé</option>
+                      <option label="Prix: premier transfert" value="2">Prix: premier transfert</option>
+                      <option label="Prix: standard" value="3">Prix: standard</option>
+                      <option label="Prix: moyenne" value="4">Prix: moyenne</option>
+                      <option label="Commentaires" value="5">Commentaires</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+      <div class="row" *ngIf="isDesktopDevice"> 
+        <div class="col-lg-6">
+          <div class="row">       
+            <div class="col-md-3 col-sm-6 col-xs-6">
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <div class="row">
+                <h6>Options de transfert:</h6>
+              </div>
+            </div>
+
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <div class="row">
+                <h6>Options de retrait:</h6>
+              </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 col-xs-6">
+              <h6>Frais:</h6>
+            </div>
+          </div>
+        </div>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-3">
+            <h6>Somme à recevoir:</h6>
+          </div>
+          <div class="col-lg-3">
+            <h6>Promotion:</h6>
+            
+          </div>
+          <div class="col-lg-3">
+            <h6>Langues disponibles :</h6>
+          </div>
+          <div class="col-lg-3">
+            <h6>Actions:</h6>
+          </div>
+        </div>
+      </div>    
+      </div>
+  
+      <div class="row res" *ngFor="let res of allCompared" style="border-style: solid; border-width: 0px; padding-top: 5px; padding-bottom:5px; margin-bottom:8px; border-radius: 10px;"> 
+                  <div class="col-md-6">
+                    <div class="row">       
+                      <div class="col-md-3 col-sm-6 col-xs-6">
+                          <img class="logo" style="width: 100px;" [alt]="res.data.operateur" [src]="res.data.logo">
+                      </div>
+                      <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row">
+                      <div class="col-md-12 col-sm-3 col-xs-6 row">
+                        <h6 *ngIf="!isDesktopDevice"><u>Options de transfert:</u></h6>
+
+                          <div *ngFor="let payment of res.data.payment_opts"  data-toggle="tooltip" data-placement="bottom" title="{{payment.split('_')[0]}}">
+                            <ng-template [ngIf]="payment.split('_')[0]=='Carte Bancaire'">
+                              <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-credit-card fa-w-18 fa-lg" aria-hidden="true" data-prefix="far" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"></path></svg>
+                            </ng-template>
+                            <ng-template [ngIf]="payment.split('_')[0]=='Virement Bancaire'">
+                              <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-credit-card-blank fa-w-18 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="credit-card-blank" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M528 40H48C21.5 40 0 61.5 0 88v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V88c0-26.5-21.5-48-48-48zM160 404c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v40zm192 0c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12v40z"></path></svg>
+                           </ng-template>
+                           <ng-template [ngIf]="payment.split('_')[0]=='Banque'"> 
+                             <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-university fa-w-16 fa-lg" aria-hidden="true" data-prefix="far" data-icon="university" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M472 440h-8v-56c0-13.255-10.745-24-24-24h-16V208h-48v152h-48V208h-48v152h-48V208h-48v152h-48V208H88v152H72c-13.255 0-24 10.745-24 24v56h-8c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zm-56 0H96v-32h320v32zm72.267-322.942L271.179 26.463a48.004 48.004 0 0 0-30.358 0L23.733 117.058A11.999 11.999 0 0 0 16 128.274V156c0 6.627 5.373 12 12 12h20v12c0 6.627 5.373 12 12 12h392c6.627 0 12-5.373 12-12v-12h20c6.627 0 12-5.373 12-12v-27.726c0-4.982-3.077-9.445-7.733-11.216zM64 144l192-72 192 72H64z"></path></svg>
+                           </ng-template>
+                           <ng-template [ngIf]="payment.split('_')[0]=='Espèces'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-money-bill fa-w-20 fa-lg" aria-hidden="true" data-prefix="far" data-icon="money-bill" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M616 64H24C10.745 64 0 74.745 0 88v335c0 13.255 10.745 24 24 24h592c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 192c44.183 0 80-35.817 80-80h384c0 44.183 35.817 80 80 80v128c-44.183 0-80 35.817-80 80H128c0-44.183-35.817-80-80-80V192zm176 64c0-61.857 42.979-112 96-112s96 50.143 96 112c0 61.87-43 112-96 112-53.023 0-96-50.153-96-112z"></path></svg>
+                          </ng-template>
+                          <ng-template [ngIf]="payment.split('_')[0]=='Compte Mobile'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-mobile-android-alt fa-w-10 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="mobile-android-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-64 452c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8zm64-80c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path></svg>
+                          </ng-template>
+                          <ng-template [ngIf]="payment.split('_')[0]=='Recharge téléphonique'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-mobile-android-alt fa-w-10 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="mobile-android-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-64 452c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8zm64-80c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path></svg>
+                          </ng-template>
+                          <ng-template [ngIf]="payment.split('_')[0]=='Factures'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-mobile-android-alt fa-w-10 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="mobile-android-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-64 452c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8zm64-80c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path></svg>
+                          </ng-template>
+                         </div>
+                        </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row">
+                          <div class="col-md-12 col-sm-3 col-xs-6 row">
+                            <h6 *ngIf="!isDesktopDevice"><u>Options de retrait:</u></h6>
+
+                          <div *ngFor="let payment of res.data.retrait_opts" data-toggle="tooltip" data-placement="bottom" title="{{payment.split('_')[0]}}">
+                            <ng-template [ngIf]="payment.split('_')[0]=='Carte Bancaire'">
+                              <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-credit-card fa-w-18 fa-lg" aria-hidden="true" data-prefix="far" data-icon="credit-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"></path></svg>
+                            </ng-template>
+                            <ng-template [ngIf]="payment.split('_')[0]=='Virement Bancaire'">
+                              <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-credit-card-blank fa-w-18 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="credit-card-blank" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M528 40H48C21.5 40 0 61.5 0 88v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V88c0-26.5-21.5-48-48-48zM160 404c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v40zm192 0c0 6.6-5.4 12-12 12H204c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12v40z"></path></svg>
+                           </ng-template>
+                           <ng-template [ngIf]="payment.split('_')[0]=='Banque'"> 
+                             <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-university fa-w-16 fa-lg" aria-hidden="true" data-prefix="far" data-icon="university" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M472 440h-8v-56c0-13.255-10.745-24-24-24h-16V208h-48v152h-48V208h-48v152h-48V208h-48v152h-48V208H88v152H72c-13.255 0-24 10.745-24 24v56h-8c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zm-56 0H96v-32h320v32zm72.267-322.942L271.179 26.463a48.004 48.004 0 0 0-30.358 0L23.733 117.058A11.999 11.999 0 0 0 16 128.274V156c0 6.627 5.373 12 12 12h20v12c0 6.627 5.373 12 12 12h392c6.627 0 12-5.373 12-12v-12h20c6.627 0 12-5.373 12-12v-27.726c0-4.982-3.077-9.445-7.733-11.216zM64 144l192-72 192 72H64z"></path></svg>
+                           </ng-template>
+                           <ng-template [ngIf]="payment.split('_')[0]=='Espèces'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-money-bill fa-w-20 fa-lg" aria-hidden="true" data-prefix="far" data-icon="money-bill" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" data-fa-i2svg=""><path fill="currentColor" d="M616 64H24C10.745 64 0 74.745 0 88v335c0 13.255 10.745 24 24 24h592c13.255 0 24-10.745 24-24V88c0-13.255-10.745-24-24-24zM48 192c44.183 0 80-35.817 80-80h384c0 44.183 35.817 80 80 80v128c-44.183 0-80 35.817-80 80H128c0-44.183-35.817-80-80-80V192zm176 64c0-61.857 42.979-112 96-112s96 50.143 96 112c0 61.87-43 112-96 112-53.023 0-96-50.153-96-112z"></path></svg>
+                          </ng-template>
+                          <ng-template [ngIf]="payment.split('_')[0]=='Compte Mobile'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-mobile-android-alt fa-w-10 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="mobile-android-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-64 452c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8zm64-80c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path></svg>
+                          </ng-template>
+                          <ng-template [ngIf]="payment.split('_')[0]=='Recharge téléphonique'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-mobile-android-alt fa-w-10 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="mobile-android-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-64 452c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8zm64-80c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path></svg>
+                          </ng-template>
+                          <ng-template [ngIf]="payment.split('_')[0]=='Factures'"> 
+                            <svg style="width: 30px; height: 15px;" class="svg-inline--fa fa-mobile-android-alt fa-w-10 fa-lg" aria-hidden="true" data-prefix="fas" data-icon="mobile-android-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M272 0H48C21.5 0 0 21.5 0 48v416c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm-64 452c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-8c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12v8zm64-80c0 6.6-5.4 12-12 12H60c-6.6 0-12-5.4-12-12V60c0-6.6 5.4-12 12-12h200c6.6 0 12 5.4 12 12v312z"></path></svg>
+                          </ng-template>
+                         </div>
+                         </div>
+                        </div>
+                      </div>
+                      
+                      <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="row titre ">
+                          <h6 *ngIf="!isDesktopDevice"><u>Frais:</u></h6>
+
+                          <div class="col-md-12 text-dark">Taux de change:</div>
+                            <div class="col-md-12 text-secondary" style="text-align: center;"> {{res.data.taux_change}} {{toDevise}}</div><br/>
+                            <div class="col-md-12 text-dark">Coût total:</div>
+                            <div class="col-md-12 text-secondary" style="text-align: center;"> {{montant}} {{fromDevise}}</div><br/>
+                            <div class="col-md-12 text-danger">Frais:</div>
+                            <div class="col-md-12 text-secondary" style="text-align: center;"> {{res.data.frais}} {{fromDevise}}</div><br/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                      <h6 *ngIf="!isDesktopDevice"><u>Somme à recevoir:</u></h6>
+
+                        <div class="row titre">
+                          <div class="col-md-12 " style="text-align: center;"><p class="text-dark"> {{res.data.val}} {{toDevise}}</p></div>
+                          
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                      <h6 *ngIf="!isDesktopDevice"><u>Promotion:</u></h6>
+
+                      <div *ngIf="res.data.promo" class="col-md-12 text-secondary" style="text-align: center;">{{res.data.promo}}</div>
+                      <div *ngIf="!res.data.promo" class="col-md-12 text-secondary" style="text-align: center;">Aucune promotion disponible</div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-6">
+                      <img  src="../../assets/icons/24/France.png" alt="Français"/>
+                      <img  src="../../assets/icons/24/England.png" alt="English"/>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-6">
+                        <a [href]="res.data.site"><button class="btn btn-outline-success btn-sm" style="margin-top: 20px; float: right; bottom: 0;">Aller sur {{res.data.operateur}}<i class="fa fa-arrow-alt-circle-right"></i> </button></a>
+                    </div>
+                  </div>
+                </div>    
+      </div>
+  </div>
+</div>
+</div>
